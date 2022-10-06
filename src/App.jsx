@@ -8,10 +8,18 @@ export const AppContext = createContext();
 
 function App() {
   const [recipes, setRecipes] = useState(null);
+  const [savedRecipes, setSavedRecipes] = useState(null);
 
   return (
     <div className="App">
-      <AppContext.Provider value={{ recipes, setRecipes }}>
+      <AppContext.Provider
+        value={{
+          recipes,
+          setRecipes,
+          savedRecipes,
+          setSavedRecipes,
+        }}
+      >
         <Router>
           <Navbar />
           <Routes>

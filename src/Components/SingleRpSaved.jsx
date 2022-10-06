@@ -1,8 +1,8 @@
 import React from "react";
 
-const SingleRp = ({ recipe, setModalData }) => {
+const SingleRpSaved = ({ recipe, setSavedModalData }) => {
   const showModal = () => {
-    setModalData(recipe);
+    setSavedModalData(recipe);
   };
 
   return (
@@ -17,4 +17,4 @@ const SingleRp = ({ recipe, setModalData }) => {
   );
 };
 
-export default SingleRp;
+export default SingleRpSaved;
