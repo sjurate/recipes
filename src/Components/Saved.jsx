@@ -12,6 +12,7 @@ const Saved = () => {
 
   return (
     <div className="saved-recipes">
+      <h2>Recipes You Wanna try... </h2>
       <div className="recipe-list">
         {[
           ...new Map(
