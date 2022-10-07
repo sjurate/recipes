@@ -13,7 +13,11 @@ const Saved = () => {
   return (
     <div className="saved-recipes">
       <div className="recipe-list">
-        {savedRecipes?.map((r) => (
+        {[
+          ...new Map(
+            savedRecipes?.map((item) => [item["strMeal"], item])
+          ).values(),
+        ].map((r) => (
           <SingleRpSaved
             key={r.idMeal}
             recipe={r}

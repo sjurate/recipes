@@ -1,8 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AppContext } from "../App";
 
 const RecipeModalSaved = ({ recipe, savedModalData, setSavedModalData }) => {
-  //const { savedRecipes, setSavedRecipes } = useContext(AppContext);
+  const { setSavedRecipes } = useContext(AppContext);
+
+  const [liked, setLiked] = useState(true);
 
   const measures = Object.keys(savedModalData)
     .filter((key) => key.includes("strMeasure"))
@@ -22,12 +24,12 @@ const RecipeModalSaved = ({ recipe, savedModalData, setSavedModalData }) => {
 
   const instructionsArr = savedModalData.strInstructions.split("\r\n");
 
-  const saveRecipe = () => {
-    //   if (savedRecipes === null) {
-    //     setSavedRecipes([modalData]);
-    //   } else {
-    //     setSavedRecipes((prev) => [...prev, modalData]);
-    //   }
+  const forgetRecipe = () => {
+    setSavedRecipes((prevSaved) =>
+      prevSaved.filter((r) => r.strMeal !== savedModalData.strMeal)
+    );
+    setSavedModalData(null);
+    setLiked((prev) => !prev);
   };
 
   return (
@@ -35,7 +37,11 @@ const RecipeModalSaved = ({ recipe, savedModalData, setSavedModalData }) => {
       <button onClick={() => setSavedModalData(null)}>X</button>
       <div className="recipe-card-heading">
         <h3>{savedModalData.strMeal}</h3>
-        <svg className="heart-svg" onClick={saveRecipe}>
+        <svg
+          className="heart-svg"
+          onClick={forgetRecipe}
+          style={{ fill: liked ? "red" : "black" }}
+        >
           <use xlinkHref="#heart"></use>
         </svg>
       </div>

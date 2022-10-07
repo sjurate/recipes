@@ -1,7 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AppContext } from "../App";
 
 const RecipeModal = ({ recipe, modalData, setModalData }) => {
+  const [liked, setLiked] = useState(false);
+
   const { savedRecipes, setSavedRecipes } = useContext(AppContext);
 
   const measures = Object.keys(modalData)
@@ -27,6 +29,7 @@ const RecipeModal = ({ recipe, modalData, setModalData }) => {
       setSavedRecipes([modalData]);
     } else {
       setSavedRecipes((prev) => [...prev, modalData]);
+      setLiked((prev) => !prev);
     }
   };
 
@@ -35,7 +38,12 @@ const RecipeModal = ({ recipe, modalData, setModalData }) => {
       <button onClick={() => setModalData(null)}>X</button>
       <div className="recipe-card-heading">
         <h3>{modalData.strMeal}</h3>
-        <svg className="heart-svg" onClick={saveRecipe}>
+
+        <svg
+          style={{ fill: liked ? "red" : "black" }}
+          className="heart-svg"
+          onClick={saveRecipe}
+        >
           <use xlinkHref="#heart"></use>
         </svg>
       </div>
